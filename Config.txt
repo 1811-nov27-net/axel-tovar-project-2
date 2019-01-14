@@ -1,0 +1,7 @@
+{"filePath": "Orders.xlsx",
+ "URL": "http://training.openspan.com/login",
+ "Username": "2153",
+ "Password": "Vasu@123",
+ "Retry": "2"
+
+ }
