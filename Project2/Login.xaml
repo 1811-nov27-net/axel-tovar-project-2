@@ -1,4 +1,4 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Login"
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Login" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Login_1"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
@@ -7,17 +7,9 @@
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
  xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
  xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
  xmlns:ui="http://schemas.uipath.com/workflow/activities"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <x:Members>
-    <x:Property Name="password" Type="InArgument(x:String)" />
-    <x:Property Name="username" Type="InArgument(x:String)" />
-    <x:Property Name="url" Type="InArgument(x:String)" />
-  </x:Members>
-  <mva:VisualBasic.Settings>
-    <x:Null />
-  </mva:VisualBasic.Settings>
-  <sap2010:WorkflowViewState.IdRef>Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -69,7 +61,19 @@
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Login" sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Username is 1:  &quot; + username.ToString + &quot;URL is: &quot; + url.ToString]" TopMost="True" />
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="username" />
+      <Variable x:TypeArguments="x:String" Name="url" />
+      <Variable x:TypeArguments="ss:SecureString" Name="password" />
+    </Sequence.Variables>
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="userLogin" DisplayName="Get Credential" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[password]" Username="[username]" />
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="webURL" DisplayName="Get Asset">
+      <ui:GetRobotAsset.Value>
+        <OutArgument x:TypeArguments="x:String">[url]</OutArgument>
+      </ui:GetRobotAsset.Value>
+      <sap2010:WorkflowViewState.IdRef>GetRobotAsset_1</sap2010:WorkflowViewState.IdRef>
+    </ui:GetRobotAsset>
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Username is:  &quot; + username.ToString + &quot;URL is: &quot; + url.ToString]" TopMost="True" />
     <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Open IE" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="True" Private="False" Url="[url]">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -82,48 +86,49 @@
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="8ab06f9c03e8dc2a2918624d7e2f515c" Selector="&lt;webctrl id='user_name' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="type password" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="True" Text="[password]">
-              <ui:TypeInto.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="99aad98000e7464613e46460e621ea78" Selector="&lt;webctrl id='user_pass' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
-              </ui:TypeInto.Target>
-            </ui:TypeInto>
-            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  login_button'" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+            <ui:TypeSecureText DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Secure Text 'INPUT  user_pass'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeSecureText_1" SecureText="[password]" SendWindowMessages="False" SimulateType="False">
+              <ui:TypeSecureText.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="d322c96dc0fe418d60cf2ee773227680" Selector="&lt;webctrl id='user_pass' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+              </ui:TypeSecureText.Target>
+            </ui:TypeSecureText>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  login_button'" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
               <ui:Click.CursorPosition>
                 <ui:CursorPosition OffsetX="45" OffsetY="24" Position="TopLeft" />
               </ui:Click.CursorPosition>
               <ui:Click.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="6dab442f69b16dbd2ec142c48f5e79b6" Selector="&lt;webctrl id='login_button' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
               </ui:Click.Target>
-              <sap2010:WorkflowViewState.IdRef>Click_3</sap2010:WorkflowViewState.IdRef>
             </ui:Click>
           </Sequence>
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dzRDOlxyZXZhdHVyZVxheGVsLXRvdmFyLXByb2plY3QtMlxQcm9qZWN0MlxMb2dpbi54YW1sEEcDaA4CAQFIBUiGAgIBEkkFZhYCAQJImgFI9AECARNJtgFJvQECARBPC2MWAgEDUA1UGwIBDFUNWRsCAQhaDWIYAgEEUqABUs4BAgEPUJoCUKYCAgENV6ABV84BAgELVZkCVaUCAgEJX6ABX9EBAgEHXDlcPQIBBlwsXDACAQU=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzRDOlxyZXZhdHVyZVxheGVsLXRvdmFyLXByb2plY3QtMlxQcm9qZWN0MlxMb2dpbi54YW1sFz8Daw4CAQFFBUXJAQIBGkYFSxgCARZMBUyEAgIBEk0FaRYCAQJFO0VGAgEfRboBRcYBAgEdRaQBRbABAgEbSDFINgIBGEY2Rj4CARdMmgFM8gECARNNtgFNvQECARBTC2YWAgEDVA1YGwIBDFkNXSECAQheDWUYAgEEVqABVs4BAgEPVJoCVKYCAgENW6ABW84BAgELWZMCWZ8CAgEJY6ABY9EBAgEHYDlgPQIBBmAsYDACAQU=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="GetRobotCredential_1" sap:VirtualizedContainerService.HintSize="414,22" />
+      <sap2010:ViewStateData Id="GetRobotAsset_1" sap:VirtualizedContainerService.HintSize="414,22" />
       <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="414,58.6666666666667" />
       <sap2010:ViewStateData Id="TypeInto_1" sap:VirtualizedContainerService.HintSize="314,134" />
-      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeSecureText_1" sap:VirtualizedContainerService.HintSize="314,106" />
       <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="336,578">
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="336,550">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="414,676.666666666667" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,899.333333333333">
+      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="414,648.666666666667" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436,995.333333333333">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Login_1" sap:VirtualizedContainerService.HintSize="476,979.333333333333" />
+      <sap2010:ViewStateData Id="Login_1" sap:VirtualizedContainerService.HintSize="476,1075.33333333333" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
