@@ -13,6 +13,7 @@
   <x:Members>
     <x:Property Name="excelDT" Type="InArgument(sd:DataTable)" />
     <x:Property Name="excelFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="orderNumber" Type="OutArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -67,12 +68,10 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="UpdateExcel" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="orderNumber" />
       <Variable x:TypeArguments="x:Int32" Default="0" Name="i" />
     </Sequence.Variables>
     <Sequence DisplayName="Web" sap2010:WorkflowViewState.IdRef="Sequence_3">
@@ -91,6 +90,7 @@
                   <OutArgument x:TypeArguments="x:String">[orderNumber]</OutArgument>
                 </ui:GetValue.Value>
               </ui:GetValue>
+              <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window 'iexplore.exe Order'" sap2010:WorkflowViewState.IdRef="CloseWindow_1" InformativeScreenshot="2345607aaf2b25f1a9a305d9de6240ae" WaitForReady="INTERACTIVE" />
             </Sequence>
           </ActivityAction>
         </ui:BrowserScope.Body>
@@ -133,20 +133,21 @@
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
-    <sads:DebugSymbol.Symbol>dzpDOlxyZXZhdHVyZVxheGVsLXRvdmFyLXByb2plY3QtMlxQcm9qZWN0MlxVcGRhdGVFeGNlbC54YW1sIkkDiQEOAgEBTDNMNgIBAk4FYhACASVjBYcBIAIBA08HYRkCASZjoAFjugECASNpC4QBFgIBBE+eAk/sAgIBLFUNXhgCASdrO2s+AgEFbQ1tvgECAR5uDYMBFQIBBlYPXR0CAShttwFtuwECASJtPW1IAgEgbaEBbakBAgEfbw+CARoCAQhuSG5lAgEHWztbSAIBKViiAVi9AQIBK3ARcOUBAgEYcRFxvgECARNyEXkaAgEOehGBARoCAQlwKXBNAgEccLoBcOIBAgEacKwBcLQBAgEZcSlxTgIBFnGzAXG7AQIBFXGlAXGtAQIBFHc7d0ICARF0PHQ/AgEPfzt/SQIBDHw8fEYCAQo=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzpDOlxyZXZhdHVyZVxheGVsLXRvdmFyLXByb2plY3QtMlxQcm9qZWN0MlxVcGRhdGVFeGNlbC54YW1sI0kDiQEOAgEBSzNLNgIBAk0FYhACASVjBYcBIAIBA04HYRkCASZjoAFjugECASNpC4QBFgIBBE6eAk7sAgIBLVQNXhgCASdrO2s+AgEFbQ1tvgECAR5uDYMBFQIBBlUPXB0CASldD12TAgIBKG23AW27AQIBIm09bUgCASBtoQFtqQECAR9vD4IBGgIBCG5IbmUCAQdaO1pIAgEqV6IBV70BAgEscBFw5QECARhxEXG+AQIBE3IReRoCAQ56EYEBGgIBCXApcE0CARxwugFw4gECARpwrAFwtAECARlxKXFOAgEWcbMBcbsBAgEVcaUBca0BAgEUdzt3QgIBEXQ8dD8CAQ9/O39JAgEMfDx8RgIBCg==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="GetValue_1" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,230">
+      <sap2010:ViewStateData Id="CloseWindow_1" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,376">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="414,376" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="500,500">
+      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="414,522" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="500,646">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -174,14 +175,14 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="500,1061.33333333333" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="522,1725.33333333333">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="522,1871.33333333333">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="UpdateExcel_1" sap:VirtualizedContainerService.HintSize="562,1845.33333333333" />
+      <sap2010:ViewStateData Id="UpdateExcel_1" sap:VirtualizedContainerService.HintSize="562,1951.33333333333" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

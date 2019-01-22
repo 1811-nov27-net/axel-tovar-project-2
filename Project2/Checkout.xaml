@@ -120,14 +120,13 @@
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="350d9cb00329be4fef1de2348fdc82ca" Selector="&lt;webctrl parentid='cart_menu' tag='IMG' /&gt;" WaitForReady="COMPLETE" />
               </ui:Click.Target>
             </ui:Click>
-            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'SPAN  total_value'">
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'SPAN  total_value'" sap2010:WorkflowViewState.IdRef="GetValue_1">
               <ui:GetValue.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="516976b47a8246e8bf7150ce063e68ff" Selector="&lt;html title='Order | Pega Studio Training Web Application' /&gt;&lt;webctrl id='total_value' tag='SPAN' /&gt;" WaitForReady="INTERACTIVE" />
               </ui:GetValue.Target>
               <ui:GetValue.Value>
                 <OutArgument x:TypeArguments="ui:GenericValue">[totalCost]</OutArgument>
               </ui:GetValue.Value>
-              <sap2010:WorkflowViewState.IdRef>GetValue_1</sap2010:WorkflowViewState.IdRef>
             </ui:GetValue>
             <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  next1_button'" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
               <ui:Click.CursorPosition>
@@ -244,27 +243,19 @@
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="f5d245b4edfdb60951055abfed629585" Selector="&lt;webctrl id='expiry_year' tag='SELECT' /&gt;" WaitForReady="COMPLETE" />
               </ui:SelectItem.Target>
             </ui:SelectItem>
-            <ui:CommentOut DisplayName="Comment Out">
-              <ui:CommentOut.Body>
-                <Sequence DisplayName="Ignored Activities">
-                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  submit_button'" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
-                    <ui:Click.CursorPosition>
-                      <ui:CursorPosition OffsetX="36" OffsetY="11" Position="TopLeft" />
-                    </ui:Click.CursorPosition>
-                    <ui:Click.Target>
-                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="a398d611f9c15d4d6c38938a4e3d1cf7" Selector="&lt;webctrl id='submit_button' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
-                    </ui:Click.Target>
-                  </ui:Click>
-                  <sap2010:WorkflowViewState.IdRef>Sequence_3</sap2010:WorkflowViewState.IdRef>
-                </Sequence>
-              </ui:CommentOut.Body>
-              <sap2010:WorkflowViewState.IdRef>CommentOut_1</sap2010:WorkflowViewState.IdRef>
-            </ui:CommentOut>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  submit_button'" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition OffsetX="36" OffsetY="11" Position="TopLeft" />
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="a398d611f9c15d4d6c38938a4e3d1cf7" Selector="&lt;webctrl id='submit_button' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
+              </ui:Click.Target>
+            </ui:Click>
           </Sequence>
         </ActivityAction>
       </ui:BrowserScope.Body>
     </ui:BrowserScope>
-    <sads:DebugSymbol.Symbol>dzdDOlxyZXZhdHVyZVxheGVsLXRvdmFyLXByb2plY3QtMlxQcm9qZWN0MlxDaGVja291dC54YW1sSEsDjAIOAgEBUwVXGAIBUVgFXBgCAU1dBWEYAgFJYgVmGAIBRWcFaxgCAUFsBYoCFwIBAlU4VT0CAVNTNlM7AgFSWjhaRAIBT1g2WEICAU5fOF9CAgFLXTZdQAIBSmQ4ZEICAUdiNmJAAgFGaThpQQIBQ2c2Zz8CAUJspAJs7QICAUByC4cCFgIBA3MNehgCATx7DYMBGwIBOIQBDYsBGAIBNIwBDZABGwIBMJEBDZUBGwIBLJYBDZoBGwIBKJsBDZ8BGwIBJKABDaQBGwIBIKUBDakBGwIBHKoBDbEBGAIBGLIBDbkBGAIBFLoBDb4BGwIBEb8BDcoBHQIBDssBDc8BGwIBC9ABDeUBHQIBCOYBDfYBHQIBBfcBDYYCHQIBBHigAXjSAQIBP3U5dTwCAT51LHUwAgE9gAFAgAFLAgE5faABfZICAgE7iQGgAYkB0QECATeGATmGAT0CATaGASyGATACATWOAaABjgHQAQIBM4wBqgKMAbcCAgExkwGgAZMBzwECAS+RAaoCkQG2AgIBLZgBoAGYAdQBAgErlgGuApYBuQICASmdAaABnQHOAQIBJ5sBqAKbAa8CAgElogGgAaIBzwECASOgAaoCoAG2AgIBIacBoAGnAdMBAgEfpQGtAqUBtgICAR2vAaABrwHNAQIBG6wBOawBPQIBGqwBLKwBMAIBGbcBoAG3AdEBAgEXtAE5tAE9AgEWtAEstAEwAgEVvAGgAbwB0gECARO6Aa0CugG0AgIBEr8BxgG/AdIBAgEPyAGgAcgBzwECARDNAaABzQHQAQIBDcsBqwLLAbkCAgEM0AHJAdAB1QECAQnjAaAB4wHSAQIBCuYByAHmAdMBAgEG9AGgAfQB0QECAQc=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzdDOlxyZXZhdHVyZVxheGVsLXRvdmFyLXByb2plY3QtMlxQcm9qZWN0MlxDaGVja291dC54YW1sS0sDgwIOAgEBUwVXGAIBVFgFXBgCAVBdBWEYAgFMYgVmGAIBSGcFaxgCAURsBYECFwIBAlU4VT0CAVZTNlM7AgFVWjhaRAIBUlg2WEICAVFfOF9CAgFOXTZdQAIBTWQ4ZEICAUpiNmJAAgFJaThpQQIBRmc2Zz8CAUVspAJs7QICAUNyC/4BFgIBA3MNehgCAT97DYIBGwIBO4MBDYoBGAIBN4sBDY8BGwIBM5ABDZQBGwIBL5UBDZkBGwIBK5oBDZ4BGwIBJ58BDaMBGwIBI6QBDagBGwIBH6kBDbABGAIBG7EBDbgBGAIBF7kBDb0BGwIBFL4BDckBHQIBEcoBDc4BGwIBDs8BDeQBHQIBC+UBDfUBHQIBCPYBDf0BGAIBBHigAXjSAQIBQnU5dTwCAUF1LHUwAgFAgAFAgAFLAgE8faABfZICAgE+iAGgAYgB0QECATqFATmFAT0CATmFASyFATACATiNAaABjQHQAQIBNosBqgKLAbcCAgE0kgGgAZIBzwECATKQAaoCkAG2AgIBMJcBoAGXAdQBAgEulQGuApUBuQICASycAaABnAHOAQIBKpoBqAKaAa8CAgEooQGgAaEBzwECASafAaoCnwG2AgIBJKYBoAGmAdMBAgEipAGtAqQBtgICASCuAaABrgHNAQIBHqsBOasBPQIBHasBLKsBMAIBHLYBoAG2AdEBAgEaswE5swE9AgEZswEsswEwAgEYuwGgAbsB0gECARa5Aa0CuQG0AgIBFb4BxgG+AdIBAgESxwGgAccBzwECARPMAaABzAHQAQIBEMoBqwLKAbkCAgEPzwHJAc8B1QECAQziAaAB4gHSAQIBDeUByAHlAdMBAgEJ8wGgAfMB0QECAQr7AaAB+wHSAQIBB/gBOfgBPQIBBvgBLPgBMAIBBQ==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -290,37 +281,22 @@
       <sap2010:ViewStateData Id="SelectItem_2" sap:VirtualizedContainerService.HintSize="314,134" />
       <sap2010:ViewStateData Id="SelectItem_3" sap:VirtualizedContainerService.HintSize="314,134" />
       <sap2010:ViewStateData Id="Click_5" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,230">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,2874">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="314,52.6666666666667">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,2820.66666666667">
+      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="414,3020" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="436,3454">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="414,2966.66666666667" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="436,3400.66666666667">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Checkout_1" sap:VirtualizedContainerService.HintSize="476,3480.66666666667" />
+      <sap2010:ViewStateData Id="Checkout_1" sap:VirtualizedContainerService.HintSize="476,3534" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
